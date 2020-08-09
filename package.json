@@ -1,0 +1,68 @@
+{
+  "name": "sisho",
+  "version": "0.0.1",
+  "description": "Sisho es una api para la gestión de procesos hospitalarios.",
+  "author": "Alexander Bonilla",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "lb-tsc",
+    "build:watch": "lb-tsc --watch",
+    "lint": "npm run prettier:check && npm run eslint",
+    "lint:fix": "npm run eslint:fix && npm run prettier:fix",
+    "prettier:cli": "lb-prettier \"**/*.ts\" \"**/*.js\"",
+    "prettier:check": "npm run prettier:cli -- -l",
+    "prettier:fix": "npm run prettier:cli -- --write",
+    "eslint": "lb-eslint --report-unused-disable-directives .",
+    "eslint:fix": "npm run eslint -- --fix",
+    "pretest": "npm run clean && npm run build",
+    "test": "lb-mocha --allow-console-logs \"dist/tests\"",
+    "posttest": "npm run lint",
+    "test:dev": "lb-mocha --allow-console-logs dist/tests/**/*.js && npm run posttest",
+    "migrate": "node ./dist/migrate",
+    "openapi-spec": "node ./dist/openapi-spec",
+    "prestart": "npm run build",
+    "start": "node -r source-map-support/register .",
+    "clean": "lb-clean dist *.tsbuildinfo .eslintcache"
+  },
+  "dependencies": {
+    "@loopback/boot": "^2.4.1",
+    "@loopback/core": "^2.9.3",
+    "@loopback/repository": "^2.11.0",
+    "@loopback/rest": "^6.0.0",
+    "@loopback/rest-explorer": "^2.2.8",
+    "@loopback/service-proxy": "^2.3.6",
+    "dotenv": "^8.2.0",
+    "tslib": "^2.0.0"
+  },
+  "devDependencies": {
+    "@loopback/build": "^6.2.0",
+    "@loopback/eslint-config": "^9.0.0",
+    "@loopback/testlab": "^3.2.2",
+    "@types/node": "^10.17.28",
+    "eslint": "^7.6.0",
+    "prettier": "2.0.5",
+    "source-map-support": "^0.5.19",
+    "typescript": "~3.9.7"
+  },
+  "engines": {
+    "node": ">=10.16"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlexanderDa/Sisho"
+  },
+  "keywords": [
+    "sisho",
+    "hospital",
+    "gestión"
+  ],
+  "files": [
+    "README.md",
+    "dist",
+    "src",
+    "!*/tests"
+  ],
+  "copyright.owner": "Alexander Bonilla"
+}
