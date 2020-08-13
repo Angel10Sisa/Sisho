@@ -16,3 +16,8 @@ export const SISHOPGC = {
   password: process.env.SISHO_PGC_PASSWORD ?? 'postgres',
   database: process.env.SISHO_PGC_DATABASE ?? 'sisho'
 }
+
+export const TOKEN = {
+  secret: process.env.SISHO_TOKEN_SECRET ?? 'My$3cREtP4$S',
+  expiresIn: process.env.SISHO_TOKEN_EXPIRES_IN ?? '3600' // it must be a string
+}

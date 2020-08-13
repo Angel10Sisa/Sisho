@@ -5,14 +5,14 @@
 
 const pkg = require('../../package.json')
 
-export interface App {
+export interface Pkg {
   author: string
   name: string
   description: string
   version: string
 }
 
-export const app: App = {
+export const app: Pkg = {
   author: pkg.author,
   name: pkg.name,
   description: pkg.description,

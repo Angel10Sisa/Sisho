@@ -4,16 +4,34 @@
 // License text available at https://opensource.org/licenses/MIT
 
 import { BootMixin } from '@loopback/boot'
-import { ApplicationConfig } from '@loopback/core'
+import { registerAuthenticationStrategy } from '@loopback/authentication'
+import { AuthenticationComponent } from '@loopback/authentication'
+import { ApplicationConfig, BindingKey } from '@loopback/core'
 import { RestExplorerComponent } from '@loopback/rest-explorer'
 import { RestExplorerBindings } from '@loopback/rest-explorer'
 import { RepositoryMixin } from '@loopback/repository'
 import { RestApplication } from '@loopback/rest'
 import { ServiceMixin } from '@loopback/service-proxy'
+import { JWTAuthenticationStrategy } from './auth'
+import { SECURITY_SCHEME_SPEC } from './auth'
 import path from 'path'
 import { MySequence } from './sequence'
-import { PasswordBindings } from './keys'
+import { MyAccountService } from './services'
+import { MyUserService } from './services'
 import { BcryptHasher } from './services'
+import { JWTService } from './services'
+import { PasswordBindings } from './keys'
+import { AccountBindings } from './keys'
+import { UserBindings } from './keys'
+import { TokenBindings } from './keys'
+import { Pkg, app } from './utils'
+import { TOKEN } from './configs'
+
+/**
+ * Information from package.json
+ */
+
+export const PackageKey = BindingKey.create<Pkg>('application.package')
 
 export { ApplicationConfig }
 
@@ -23,8 +41,25 @@ export class Application extends BootMixin(
   constructor(options: ApplicationConfig = {}) {
     super(options)
 
+    this.api({
+      openapi: '3.0.0',
+      info: {
+        title: app.name,
+        version: app.version,
+        description: app.description
+      },
+      paths: {},
+      components: { securitySchemes: SECURITY_SCHEME_SPEC },
+      servers: [{ url: '/' }]
+    })
+
     // setup bindings
     this.setUpBindings()
+
+    // Bind authentication component related elements
+    this.component(AuthenticationComponent)
+
+    registerAuthenticationStrategy(this, JWTAuthenticationStrategy)
 
     // Set up the custom sequence
     this.sequence(MySequence)
@@ -51,8 +86,22 @@ export class Application extends BootMixin(
   }
 
   setUpBindings(): void {
+    // Bind package.json to the application context
+    this.bind(PackageKey).to(app)
+
+    // token service
+    this.bind(TokenBindings.SECRET).to(TOKEN.secret)
+    this.bind(TokenBindings.EXPIRES_IN).to(TOKEN.expiresIn)
+    this.bind(TokenBindings.SERVICE).toClass(JWTService)
+
     // Bind bcrypt hash services
     this.bind(PasswordBindings.ROUNDS).to(10)
     this.bind(PasswordBindings.HASHER).toClass(BcryptHasher)
+
+    // User service
+    this.bind(UserBindings.SERVICE).toClass(MyUserService)
+
+    // Account services
+    this.bind(AccountBindings.SERVICE).toClass(MyAccountService)
   }
 }

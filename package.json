@@ -27,6 +27,7 @@
     "clean": "lb-clean dist *.tsbuildinfo .eslintcache"
   },
   "dependencies": {
+    "@loopback/authentication": "^5.0.0",
     "@loopback/boot": "^2.4.1",
     "@loopback/core": "^2.9.3",
     "@loopback/repository": "^2.11.0",
@@ -35,6 +36,7 @@
     "@loopback/service-proxy": "^2.3.6",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
+    "jsonwebtoken": "^8.5.1",
     "loopback-connector-postgresql": "^5.0.2",
     "tslib": "^2.0.0"
   },
