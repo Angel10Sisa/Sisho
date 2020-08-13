@@ -12,6 +12,8 @@ import { RestApplication } from '@loopback/rest'
 import { ServiceMixin } from '@loopback/service-proxy'
 import path from 'path'
 import { MySequence } from './sequence'
+import { PasswordBindings } from './keys'
+import { BcryptHasher } from './services'
 
 export { ApplicationConfig }
 
@@ -20,6 +22,9 @@ export class Application extends BootMixin(
 ) {
   constructor(options: ApplicationConfig = {}) {
     super(options)
+
+    // setup bindings
+    this.setUpBindings()
 
     // Set up the custom sequence
     this.sequence(MySequence)
@@ -43,5 +48,11 @@ export class Application extends BootMixin(
         nested: true
       }
     }
+  }
+
+  setUpBindings(): void {
+    // Bind bcrypt hash services
+    this.bind(PasswordBindings.ROUNDS).to(10)
+    this.bind(PasswordBindings.HASHER).toClass(BcryptHasher)
   }
 }

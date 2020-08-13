@@ -33,13 +33,16 @@
     "@loopback/rest": "^6.0.0",
     "@loopback/rest-explorer": "^2.2.8",
     "@loopback/service-proxy": "^2.3.6",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
+    "loopback-connector-postgresql": "^5.0.2",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
     "@loopback/build": "^6.2.0",
     "@loopback/eslint-config": "^9.0.0",
     "@loopback/testlab": "^3.2.2",
+    "@types/bcryptjs": "^2.4.2",
     "@types/node": "^10.17.28",
     "eslint": "^7.6.0",
     "prettier": "2.0.5",
