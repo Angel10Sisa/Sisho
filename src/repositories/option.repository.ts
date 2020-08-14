@@ -4,16 +4,27 @@
 // License text available at https://opensource.org/licenses/MIT
 
 import { DefaultCrudRepository } from '@loopback/repository'
-import { Option, OptionRelations } from '../models'
-import { SishoDataSource } from '../datasources'
-import { inject } from '@loopback/core'
+import { BelongsToAccessor } from '@loopback/repository'
+import { repository } from '@loopback/repository'
+import { Option, OptionRelations, Group } from '../models'
+import { SishoPgcDataSource } from '../datasources'
+import { inject, Getter } from '@loopback/core'
+import { GroupRepository } from './group.repository'
 
 export class OptionRepository extends DefaultCrudRepository<
   Option,
   typeof Option.prototype.id,
   OptionRelations
 > {
-  constructor(@inject('datasources.sishoPGC') dataSource: SishoDataSource) {
+  public readonly group: BelongsToAccessor<Group, typeof Option.prototype.id>
+
+  constructor(
+    @inject('datasources.sishoPGC') dataSource: SishoPgcDataSource,
+    @repository.getter('GroupRepository')
+    protected groupRepositoryGetter: Getter<GroupRepository>
+  ) {
     super(Option, dataSource)
+    this.group = this.createBelongsToAccessorFor('group', groupRepositoryGetter)
+    this.registerInclusionResolver('group', this.group.inclusionResolver)
   }
 }

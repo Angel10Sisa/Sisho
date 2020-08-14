@@ -3,13 +3,11 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-import {
-  DefaultCrudRepository,
-  repository,
-  HasManyThroughRepositoryFactory
-} from '@loopback/repository'
+import { HasManyThroughRepositoryFactory } from '@loopback/repository'
+import { DefaultCrudRepository } from '@loopback/repository'
+import { repository } from '@loopback/repository'
 import { Role, RoleRelations, Module, Permission } from '../models'
-import { SishoDataSource } from '../datasources'
+import { SishoPgcDataSource } from '../datasources'
 import { inject, Getter } from '@loopback/core'
 import { PermissionRepository } from './permission.repository'
 import { ModuleRepository } from './module.repository'
@@ -27,7 +25,7 @@ export class RoleRepository extends DefaultCrudRepository<
   >
 
   constructor(
-    @inject('datasources.sishoPGC') dataSource: SishoDataSource,
+    @inject('datasources.sishoPGC') dataSource: SishoPgcDataSource,
     @repository.getter('PermissionRepository')
     protected permissionRepositoryGetter: Getter<PermissionRepository>,
     @repository.getter('ModuleRepository')

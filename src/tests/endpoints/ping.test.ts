@@ -6,8 +6,9 @@
 import { Client, expect } from '@loopback/testlab'
 import { Application } from '../..'
 import { setupApplication } from './setup.spec'
+import { message } from '../../utils'
 
-describe('Ping endpoint', () => {
+describe(message.titlebox('Ping endpoint'), () => {
   let app: Application
   let client: Client
 

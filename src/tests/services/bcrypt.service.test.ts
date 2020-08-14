@@ -5,10 +5,11 @@
 
 import { BcryptHasher } from '../../services'
 import { expect } from '@loopback/testlab'
+import { message } from '../../utils'
 
 const DECRYPTED = 'my message'
 
-describe('Bcrypt', () => {
+describe(message.titlebox('Bcrypt'), () => {
   it('Encrypt and compare', async () => {
     const bcrypt: BcryptHasher = new BcryptHasher(Math.random())
     const encrypted = await bcrypt.encrypt(DECRYPTED)

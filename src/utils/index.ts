@@ -4,4 +4,5 @@
 // License text available at https://opensource.org/licenses/MIT
 
 export * from './pkg'
+export * from './print'
 export * from './credentials'

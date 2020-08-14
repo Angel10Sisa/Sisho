@@ -44,7 +44,7 @@ export function character(definition: {
  */
 export function integer(definition: { required?: boolean; columnName?: string }) {
   return property({
-    type: 'string',
+    type: 'number',
     required: definition.required,
     postgresql: {
       columnName: definition.columnName,

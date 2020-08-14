@@ -4,16 +4,16 @@
 // License text available at https://opensource.org/licenses/MIT
 
 import { DefaultCrudRepository } from '@loopback/repository'
-import { Permission, PermissionRelations } from '../models'
+import { Group, GroupRelations } from '../models'
 import { SishoPgcDataSource } from '../datasources'
 import { inject } from '@loopback/core'
 
-export class PermissionRepository extends DefaultCrudRepository<
-  Permission,
-  typeof Permission.prototype.id,
-  PermissionRelations
+export class GroupRepository extends DefaultCrudRepository<
+  Group,
+  typeof Group.prototype.id,
+  GroupRelations
 > {
   constructor(@inject('datasources.sishoPGC') dataSource: SishoPgcDataSource) {
-    super(Permission, dataSource)
+    super(Group, dataSource)
   }
 }

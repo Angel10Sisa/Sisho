@@ -9,7 +9,7 @@ import {
   BelongsToAccessor
 } from '@loopback/repository'
 import { User, UserRelations, Role } from '../models'
-import { SishoDataSource } from '../datasources'
+import { SishoPgcDataSource } from '../datasources'
 import { inject, Getter } from '@loopback/core'
 import { RoleRepository } from './role.repository'
 
@@ -21,7 +21,7 @@ export class UserRepository extends DefaultCrudRepository<
   public readonly role: BelongsToAccessor<Role, typeof User.prototype.id>
 
   constructor(
-    @inject('datasources.sishoPGC') dataSource: SishoDataSource,
+    @inject('datasources.sishoPGC') dataSource: SishoPgcDataSource,
     @repository.getter('RoleRepository')
     protected roleRepositoryGetter: Getter<RoleRepository>
   ) {

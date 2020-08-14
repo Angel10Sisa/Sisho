@@ -6,10 +6,11 @@
 import { Client, expect } from '@loopback/testlab'
 import { UserRepository } from '../../repositories'
 import { setupApplication } from './setup.spec'
-import { DEFAULT_ADMIN } from '../../configs'
+import { DEFAULT_ADMIN } from '../../migrations'
 import { Application } from '../..'
+import { message } from '../../utils'
 
-describe('Account endpoint', () => {
+describe(message.titlebox('Account Endpoint'), () => {
   let app: Application
   let client: Client
   let adminId: number

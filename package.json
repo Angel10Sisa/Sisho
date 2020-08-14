@@ -20,7 +20,7 @@
     "test": "lb-mocha --allow-console-logs \"dist/tests\"",
     "posttest": "npm run lint",
     "test:dev": "lb-mocha --allow-console-logs dist/tests/**/*.js && npm run posttest",
-    "migrate": "node ./dist/migrate",
+    "migrate": "node ./dist/migrations/migrate",
     "openapi-spec": "node ./dist/openapi-spec",
     "prestart": "npm run build",
     "start": "node -r source-map-support/register .",

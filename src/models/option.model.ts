@@ -3,16 +3,26 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
+import { belongsTo } from '@loopback/repository'
 import { model } from '@loopback/repository'
 import { Audit } from '.'
 import { id } from './pg'
 import { character } from './pg'
+import { Group } from '.'
 
 @model({
   settings: {
+    foreignKeys: {
+      fkOptionGroup: {
+        name: 'fk_option_group',
+        entity: 'tgroup',
+        entityKey: 'id',
+        foreignKey: 'groupid'
+      }
+    },
     indexes: {
       uniqueOptionCombination: {
-        keys: { name: 1, group: 1 },
+        keys: { name: 1, groupid: 1 },
         options: { unique: true }
       }
     }
@@ -21,9 +31,9 @@ import { character } from './pg'
 export class Option extends Audit {
   @id() id?: number
 
-  @character({ required: true, length: 30, columnName: 'cgroup' }) group: string
-
   @character({ required: true, length: 75 }) name: string
+
+  @belongsTo(() => Group, {}, { required: true }) groupId: number
 
   constructor(data?: Partial<Option>) {
     super(data)

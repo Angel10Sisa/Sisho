@@ -14,7 +14,7 @@ const config = SISHOPGC
 // gracefully. The `stop()` method is inherited from `juggler.DataSource`.
 // Learn more at https://loopback.io/doc/en/lb4/Life-cycle.html
 @lifeCycleObserver('datasource')
-export class SishoDataSource extends juggler.DataSource implements LifeCycleObserver {
+export class SishoPgcDataSource extends juggler.DataSource implements LifeCycleObserver {
   static dataSourceName = 'sishoPGC'
   static readonly defaultConfig = config
 

@@ -3,13 +3,11 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-import {
-  DefaultCrudRepository,
-  repository,
-  HasOneRepositoryFactory
-} from '@loopback/repository'
+import { HasOneRepositoryFactory } from '@loopback/repository'
+import { DefaultCrudRepository } from '@loopback/repository'
+import { repository } from '@loopback/repository'
 import { Profile, ProfileRelations, User } from '../models'
-import { SishoDataSource } from '../datasources'
+import { SishoPgcDataSource } from '../datasources'
 import { inject, Getter } from '@loopback/core'
 import { UserRepository } from './user.repository'
 
@@ -21,7 +19,7 @@ export class ProfileRepository extends DefaultCrudRepository<
   public readonly user: HasOneRepositoryFactory<User, typeof Profile.prototype.id>
 
   constructor(
-    @inject('datasources.sishoPGC') dataSource: SishoDataSource,
+    @inject('datasources.sishoPGC') dataSource: SishoPgcDataSource,
     @repository.getter('UserRepository')
     protected userRepositoryGetter: Getter<UserRepository>
   ) {

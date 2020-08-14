@@ -5,7 +5,7 @@
 
 import { DefaultCrudRepository } from '@loopback/repository'
 import { Module, ModuleRelations } from '../models'
-import { SishoDataSource } from '../datasources'
+import { SishoPgcDataSource } from '../datasources'
 import { inject } from '@loopback/core'
 
 export class ModuleRepository extends DefaultCrudRepository<
@@ -13,7 +13,7 @@ export class ModuleRepository extends DefaultCrudRepository<
   typeof Module.prototype.id,
   ModuleRelations
 > {
-  constructor(@inject('datasources.sishoPGC') dataSource: SishoDataSource) {
+  constructor(@inject('datasources.sishoPGC') dataSource: SishoPgcDataSource) {
     super(Module, dataSource)
   }
 }
