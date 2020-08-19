@@ -5,4 +5,5 @@
 
 export * from './pkg'
 export * from './print'
+export * from './random'
 export * from './credentials'

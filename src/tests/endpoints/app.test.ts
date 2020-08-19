@@ -7,8 +7,9 @@ import { Client, expect } from '@loopback/testlab'
 import { Application } from '../..'
 import { setupApplication } from './setup.spec'
 import { message } from '../../utils'
+import { app as pkg } from '../../utils'
 
-describe(message.endpoint('Ping'), () => {
+describe(message.endpoint('App'), () => {
   let app: Application
   let client: Client
 
@@ -20,8 +21,12 @@ describe(message.endpoint('Ping'), () => {
     await app.stop()
   })
 
-  it('GET     =>  /api/ping', async () => {
-    const res = await client.get('/ping').expect(200)
-    expect(res.body).to.containEql({ success: true })
+  it('GET     =>  /api/app', async () => {
+    await client
+      .get('/api/app')
+      .expect(200)
+      .then(res => {
+        expect(res.body).to.containEql(pkg)
+      })
   })
 })

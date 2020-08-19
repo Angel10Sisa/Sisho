@@ -57,7 +57,7 @@ export class User extends Audit {
 
   @boolean({ required: true, default: true }) isActive?: boolean
 
-  @boolean({ default: false, required: true }) emailVerified?: boolean
+  @boolean({ default: false, required: false }) emailVerified?: boolean
 
   @character({ length: 25 }) verificationToken: string
 

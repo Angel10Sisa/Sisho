@@ -12,8 +12,8 @@ import { User } from '../models'
 export const DEFAULT_PROFILE: Profile = new Profile({
   createdBy: 0,
   firstName: 'admin',
-  lastName: 'sifme',
-  email: 'admin@sifme.com',
+  lastName: 'sisho',
+  email: 'admin@sisho.com',
   address: 'my address'
 })
 

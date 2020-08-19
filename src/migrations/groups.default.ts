@@ -6,8 +6,9 @@
 import { Group } from '../models'
 
 export const BLOODTYPE: Group = new Group({ id: 1, name: 'Tipo de sangre' })
+export const CIVILSTATUS: Group = new Group({ id: 2, name: 'Estado civil' })
 
 /**
  * Default groups.
  */
-export const GROUPS: Group[] = [BLOODTYPE]
+export const GROUPS: Group[] = [BLOODTYPE, CIVILSTATUS]

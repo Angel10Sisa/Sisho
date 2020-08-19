@@ -3,4 +3,16 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
+export * from './option-group.controller'
+export * from './profile-user.controller'
+export * from './role-module.controller'
+export * from './user-role.controller'
+export * from './account.controller'
+export * from './company.controller'
+export * from './profile.controller'
+export * from './option.controller'
+export * from './module.controller'
+export * from './group.controller'
+export * from './user.controller'
+export * from './role.controller'
 export * from './ping.controller'

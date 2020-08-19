@@ -7,12 +7,10 @@ import { hasOne } from '@loopback/repository'
 import { model } from '@loopback/repository'
 import { User } from './user.model'
 import { Audit } from '.'
-
 import { id } from './pg'
 import { dni } from './pg'
 import { phone } from './pg'
 import { email } from './pg'
-import { option } from './pg'
 import { address } from './pg'
 import { passport } from './pg'
 import { filename } from './pg'
@@ -40,7 +38,7 @@ export class Profile extends Audit {
 
   @address({ required: true }) address: string
 
-  @option({}) blooType?: string
+  @character({ length: 5 }) blooType?: string
 
   @hasOne(() => User)
   user: User
