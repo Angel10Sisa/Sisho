@@ -81,7 +81,12 @@ class Migrate {
   private async saveDefaultCompany(): Promise<void> {
     const repo = await this.app.getRepository(CompanyRepository)
     if ((await repo.count()).count === 0) {
-      await repo.create({ name: 'sisho', address: 'Company address' })
+      await repo.create({
+        name: 'sisho',
+        address: 'Company address',
+        primaryColor: '#00bcd4',
+        secondaryColor: '#b2ebf2'
+      })
     }
   }
 

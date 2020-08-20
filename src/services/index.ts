@@ -4,6 +4,8 @@
 // License text available at https://opensource.org/licenses/MIT
 
 export * from './account.service'
+export * from './storage.service'
 export * from './bcrypt.service'
+export * from './email.service'
 export * from './user.service'
 export * from './jwt.service'

@@ -17,13 +17,17 @@ import { SECURITY_SCHEME_SPEC } from './auth'
 import path from 'path'
 import { MySequence } from './sequence'
 import { MyAccountService } from './services'
+import { MyStorageService } from './services'
+import { MyEmailService } from './services'
 import { MyUserService } from './services'
 import { BcryptHasher } from './services'
 import { JWTService } from './services'
 import { PasswordBindings } from './keys'
+import { StorageBindings } from './keys'
 import { AccountBindings } from './keys'
-import { UserBindings } from './keys'
 import { TokenBindings } from './keys'
+import { EmailBindings } from './keys'
+import { UserBindings } from './keys'
 import { Pkg, app } from './utils'
 import { TOKEN } from './configs'
 
@@ -64,8 +68,11 @@ export class Application extends BootMixin(
     // Set up the custom sequence
     this.sequence(MySequence)
 
-    // Set up default home page
-    this.static('/', path.join(__dirname, '../public'))
+    // Set up default web client
+    this.static('/', path.join(__dirname, '../public/client'))
+
+    // Set up public files
+    this.static('/', path.join(__dirname, '../public/public'))
 
     // Customize @loopback/rest-explorer configuration here
     this.configure(RestExplorerBindings.COMPONENT).to({
@@ -103,5 +110,11 @@ export class Application extends BootMixin(
 
     // Account services
     this.bind(AccountBindings.SERVICE).toClass(MyAccountService)
+
+    // Storage service
+    this.bind(StorageBindings.SERVICE).toClass(MyStorageService)
+
+    // Email service
+    this.bind(EmailBindings.SERVICE).toClass(MyEmailService)
   }
 }

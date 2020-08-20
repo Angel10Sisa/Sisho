@@ -12,16 +12,23 @@ export function app(): OperationObject {
   return {
     responses: {
       '200': {
-        title: 'PingResponse',
+        title: 'Application',
         content: {
           'application/json': {
             schema: {
               type: 'object',
               properties: {
-                author: { type: 'string' },
                 name: { type: 'string' },
-                description: { type: 'string' },
-                version: { type: 'string' }
+                version: { type: 'string' },
+                company: {
+                  type: 'object',
+                  properties: {
+                    name: { type: 'string' },
+                    logo: { type: 'string' },
+                    primaryColor: { type: 'string' },
+                    secondaryColor: { type: 'string' }
+                  }
+                }
               }
             }
           }

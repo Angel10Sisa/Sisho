@@ -4,8 +4,12 @@
 // License text available at https://opensource.org/licenses/MIT
 
 require('dotenv').config()
+import fs from 'fs'
 import { ApplicationConfig } from './application'
 import { Application } from './application'
+import { SERVER } from './configs'
+import { EMAIL } from './configs'
+import { print } from './utils'
 
 export * from './application'
 
@@ -15,8 +19,14 @@ export async function main(options: ApplicationConfig = {}) {
   await app.start()
 
   const url = app.restServer.url
-  console.log(`Server is running at ${url}`)
-  console.log(`Try ${url}/ping`)
+  console.clear()
+  print.titlebox('The application is running')
+
+  console.log(`\x1b[36m\tCLIENT:    \x1b[0m${url}`)
+  console.log(`\x1b[36m\tAPI:       \x1b[0m${url}/api/explorer`)
+  if (!EMAIL.isSupported()) {
+    console.log(`\x1b[33m\tWARNING:   \x1b[0mEmail is not supported.`)
+  }
 
   return app
 }
@@ -43,4 +53,9 @@ if (require.main === module) {
     console.error('Cannot start the application.', err)
     process.exit(1)
   })
+}
+
+// create sandbox directory
+if (!fs.existsSync(SERVER.sandbox)) {
+  fs.mkdirSync(SERVER.sandbox)
 }

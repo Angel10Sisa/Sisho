@@ -6,7 +6,8 @@
 import { TokenService } from '@loopback/authentication'
 import { UserService } from '@loopback/authentication'
 import { BindingKey } from '@loopback/context'
-import { DecryptedHasher } from './services'
+import { DecryptedHasher, EmailService } from './services'
+import { StorageService } from './services'
 import { AccountService } from './services'
 import { Credentials } from './utils'
 import { User } from './models'
@@ -34,4 +35,12 @@ export namespace TokenBindings {
   export const SERVICE = BindingKey.create<TokenService>(
     'services.authentication.jwt.tokenservice'
   )
+}
+
+export namespace StorageBindings {
+  export const SERVICE = BindingKey.create<StorageService>('services.storage.service')
+}
+
+export namespace EmailBindings {
+  export const SERVICE = BindingKey.create<EmailService>('services.email.service')
 }

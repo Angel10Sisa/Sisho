@@ -66,3 +66,9 @@ typings/
 
 # loopback cli repositories config
 *.datasource.config.json
+
+# sandbox
+.sandbox
+
+# web client
+public/client

@@ -7,7 +7,6 @@ import { Client, expect } from '@loopback/testlab'
 import { Application } from '../..'
 import { setupApplication } from './setup.spec'
 import { message } from '../../utils'
-import { app as pkg } from '../../utils'
 
 describe(message.endpoint('App'), () => {
   let app: Application
@@ -26,7 +25,7 @@ describe(message.endpoint('App'), () => {
       .get('/api/app')
       .expect(200)
       .then(res => {
-        expect(res.body).to.containEql(pkg)
+        expect(res.body).to.have.properties('name', 'version', 'company')
       })
   })
 })

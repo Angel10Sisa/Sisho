@@ -6,9 +6,10 @@ Esta sección describe las variables de entorno necesarias para que el _back-end
 
 Configuración de las variables del servidor.
 
-| ENV          | POR DEFECTO           | DESCRIPCIÓN                                               |
-| :----------- | :-------------------- | :-------------------------------------------------------- |
-| SISHO_DOMAIN | http://localhost:3000 | Nombre del dominio, para la carga de archivos al sistema. |
+| ENV           | POR DEFECTO           | DESCRIPCIÓN                                               |
+| :------------ | :-------------------- | :-------------------------------------------------------- |
+| SISHO_DOMAIN  | http://localhost:3000 | Nombre del dominio, para la carga de archivos al sistema. |
+| SISHO_SANDBOX | sisho/.sandbox        | Directorio para almacenar archivos cargados.              |
 
 - **Base de datos**
 
@@ -30,3 +31,13 @@ Variables para el token de acceso que permite la autenticación de un usuario y 
 | ---------------------- | -------------- | ---------------------------------------------- |
 | SISHO_TOKEN_SECRET     | My\$3cREtP4\$S | Clave para el cifrado del token de acceso.     |
 | SISHO_TOKEN_EXPIRES_IN | 3600           | Tiempo de validez de un token en milisegundos. |
+
+- **Servicio de correo electrónico**
+
+Para facilitar la creación de una cuenta de usuario y la restauración de contraseñas se recomienda utilizar un correo electrónico, para habilitar este servicio se requieren las tres variables que se muestran a continuación, si las variables no existen, los servicios de correo electrónico no estará disponibles.
+
+| ENV                  | EJEMPLO            | DESCRIPCIÓN                                       |
+| :------------------- | :----------------- | :------------------------------------------------ |
+| SISHO_SMTP_HOST      | smtp.office365.com | Nombre de host o la dirección IP para conectarse. |
+| SISHO_EMAIL_ADDRESS  | user@example.com   | Cuenta de correo electrónico                      |
+| SISHO_EMAIL_PASSWORD | My\$3cREtP4\$S     | Contraseña de correo electrónico                  |

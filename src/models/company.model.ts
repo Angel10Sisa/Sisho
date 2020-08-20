@@ -43,6 +43,10 @@ export class Company extends Entity {
 
   @character({ length: 10 }) ruc?: string
 
+  @character({ length: 25, required: true }) primaryColor?: string
+
+  @character({ length: 25, required: true }) secondaryColor?: string
+
   constructor(data?: Partial<Company>) {
     super(data)
   }

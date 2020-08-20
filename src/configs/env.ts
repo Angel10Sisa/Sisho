@@ -3,8 +3,11 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
+import path from 'path'
+
 export const SERVER = {
-  domain: process.env.SISHO_DOMAIN ?? 'http://localhost:3000'
+  domain: process.env.SISHO_DOMAIN ?? 'http://localhost:3000',
+  sandbox: process.env.SISHO_SANDBOX ?? path.join(__dirname, '../../.sandbox')
 }
 
 export const SISHOPGC = {
@@ -20,4 +23,17 @@ export const SISHOPGC = {
 export const TOKEN = {
   secret: process.env.SISHO_TOKEN_SECRET ?? 'My$3cREtP4$S',
   expiresIn: process.env.SISHO_TOKEN_EXPIRES_IN ?? '3600' // it must be a string
+}
+
+export const EMAIL = {
+  smptHost: process.env.SISHO_SMTP_HOST ?? '',
+  address: process.env.SISHO_EMAIL_ADDRESS ?? '',
+  password: process.env.SISHO_EMAIL_PASSWORD ?? '',
+  isSupported: (): boolean => {
+    return (
+      process.env.SISHO_SMTP_HOST !== undefined &&
+      process.env.SISHO_EMAIL_ADDRESS !== undefined &&
+      process.env.SISHO_EMAIL_PASSWORD !== undefined
+    )
+  }
 }
