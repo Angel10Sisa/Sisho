@@ -7,7 +7,9 @@
             <v-progress-circular :size="125" color="#00bcd4" indeterminate>
               <img src="/logo.svg" alt="Sisho" width="60" />
             </v-progress-circular>
-            <h1 style="margin-top: 50px; color: #00bcd4;">Sisho</h1>
+            <h1 style="margin-top: 50px; color: #00bcd4;">
+              {{ $store.state.app.info.name }}
+            </h1>
           </v-col>
         </v-row>
       </v-container>
@@ -17,6 +19,6 @@
 
 <script lang="ts">
 //@ts-ignore
-import Controller from './RootPageCtrl'
+import Controller from './RootController'
 export default Controller
 </script>

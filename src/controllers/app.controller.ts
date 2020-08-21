@@ -27,6 +27,7 @@ export class AppController {
       version: app.version,
       company: {
         name: company.name,
+        smallName: company.smallName,
         logo: company.logo ?? '/logo.svg',
         primaryColor: company.primaryColor,
         secondaryColor: company.secondaryColor
