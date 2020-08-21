@@ -29,7 +29,7 @@ export class AppController {
         name: company.name,
         logo: company.logo ?? '/logo.svg',
         primaryColor: company.primaryColor,
-        secondaryColor: company.primaryColor
+        secondaryColor: company.secondaryColor
       }
     }
   }

@@ -22,7 +22,12 @@
     "test:dev": "lb-mocha --allow-console-logs dist/tests/**/*.js && npm run posttest",
     "migrate": "node ./dist/migrations/migrate",
     "openapi-spec": "node ./dist/openapi-spec",
-    "prestart": "npm run build",
+    "build:client":"cd client && npm run build",
+    "serve:client": "cd client && npm run serve",
+    "serve:api": "npm run clean && npm run build && node -r source-map-support/register .",
+    "serve": "npm run serve:api & npm run serve:client",
+    "prestart": "npm run clean && npm run build && npm run build:client",
+    "preinstall": "cd client && npm install",
     "start": "node -r source-map-support/register .",
     "clean": "lb-clean dist *.tsbuildinfo .eslintcache"
   },
