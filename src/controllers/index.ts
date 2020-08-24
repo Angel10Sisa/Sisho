@@ -6,6 +6,7 @@
 export * from './option-group.controller'
 export * from './profile-user.controller'
 export * from './role-module.controller'
+export * from './permission.controller'
 export * from './user-role.controller'
 export * from './account.controller'
 export * from './storage.controller'

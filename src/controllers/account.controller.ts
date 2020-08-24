@@ -20,8 +20,8 @@ import { PasswordBindings } from '../keys'
 import { AccountBindings } from '../keys'
 import { TokenBindings } from '../keys'
 import { UserBindings } from '../keys'
-import { TOKEN } from '../configs'
 import { User } from '../models'
+import jwt from 'jsonwebtoken'
 
 export class AccountController {
   constructor(
@@ -36,7 +36,7 @@ export class AccountController {
   async login(
     @requestBody(spect.login())
     credentials: Credentials
-  ): Promise<{ token: string; duration: number }> {
+  ): Promise<{ token: string; expiresAt: number }> {
     // ensure the user exists, and the password is correct
     const user = await this.userService.verifyCredentials(credentials)
 
@@ -46,13 +46,16 @@ export class AccountController {
     // create a JSON Web Token based on the user profile
     const token = await this.jwtService.generateToken(userProfile)
 
-    return { token, duration: Number(TOKEN.expiresIn) }
+    // token expires at
+    const { exp } = jwt.decode(token) as { exp: number }
+
+    return { token, expiresAt: exp }
   }
 
   @post('/api/account/activate', spect.logged())
   async activate(
     @requestBody(spect.toActivate()) verifier: Verifier
-  ): Promise<{ token: string; duration: number }> {
+  ): Promise<{ token: string; expiresAt: number }> {
     let token = ''
     const user = await this.userRepo.findOne({
       where: { email: verifier.email }
@@ -77,7 +80,10 @@ export class AccountController {
     } else {
       throw new HttpErrors.BadRequest('BAD_ACCOUNT')
     }
-    return { token, duration: Number(TOKEN.expiresIn) }
+    // token expires at
+    const { exp } = jwt.decode(token) as { exp: number }
+
+    return { token, expiresAt: exp }
   }
 
   @authenticate('jwt')

@@ -180,7 +180,7 @@ describe(message.endpoint('Account'), () => {
       })
       .then(async ({ body }) => {
         expect(body).to.have.property('token').to.be.String()
-        expect(body).to.have.property('duration').to.be.Number()
+        expect(body).to.have.property('expiresAt').to.be.Number()
         const result = await repository.findById(userModel.id)
         expect(result.emailVerified).to.be.eql(true)
         expect(result.verificationToken).to.be.eql('')

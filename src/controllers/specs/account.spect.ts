@@ -25,7 +25,7 @@ export function logged(): OperationObject {
                 token: {
                   type: 'string'
                 },
-                duration: {
+                expiresAt: {
                   type: 'number'
                 }
               }
