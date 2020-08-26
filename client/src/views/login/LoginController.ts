@@ -5,14 +5,54 @@
 
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import Password from '@/components/password.vue'
+import { hasValidToken } from '@/utils/auth'
+import service from '@/services/AccountService'
+import password from '@/components/password.vue'
 
-@Component({ name: 'login-page', components: { Password } })
+@Component({ name: 'login-page', components: { password } })
 export default class LoginController extends Vue {
   public email = ''
   public password = ''
   public alert = false
   public error = ''
 
-  public login(): void {}
+  beforeMount(): void {
+    if (hasValidToken()) {
+      this.$router.push({ name: 'Root' })
+    }
+  }
+
+  public login(): void {
+    service
+      .login(this.email, this.password)
+      .then(res => {
+        // @ts-ignore
+        Vue.http.headers.common['Authorization'] = res.token
+        sessionStorage.setItem('token', res.token)
+        sessionStorage.setItem('expiresAt', String(res.expiresAt))
+        this.$router.push({ name: 'Root' })
+      })
+      .catch(err => {
+        this.alert = true
+        switch (err.body.error.message) {
+          case 'BAD_ACCOUNT':
+            this.error = 'No existe la cuenta de usuario.'
+            break
+          case 'BAD_PASS':
+            this.error = 'La contraseña es incorrecta.'
+            break
+
+          case 'INACTIVE_ACCOUNT':
+            this.error = 'La cuenta ya no tiene acceso.'
+            break
+          case 'EMAIL_NOT_VERIFIED':
+            this.error = 'El correo no ha sido verificado.'
+            break
+
+          default:
+            this.error = 'No se pudo ingresar.'
+            break
+        }
+      })
+  }
 }

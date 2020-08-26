@@ -9,10 +9,11 @@ import { RouteConfig } from 'vue-router'
 import Root from '@/router/RootRouter'
 import Activate from '@/router/ActivateRouter'
 import Login from '@/router/LoginRouter'
+import app from '@/router/AppRouter'
 
 Vue.use(VueRouter)
 
-const routes: Array<RouteConfig> = [Root, Activate, Login]
+const routes: Array<RouteConfig> = [Root, Activate, Login, app]
 
 const router = new VueRouter({
   base: process.env.BASE_URL,

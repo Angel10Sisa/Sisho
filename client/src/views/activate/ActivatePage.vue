@@ -16,13 +16,14 @@
                     <v-avatar v-if="query.image" size="120px">
                       <v-img :src="query.image" :alt="query.username" />
                     </v-avatar>
-                    <img
-                      v-else
-                      src="@/assets/user.svg"
-                      alt="Usuario"
-                      width="120"
-                      height="120"
-                    />
+                    <v-avatar v-else class="primary" size="120px">
+                      <v-img
+                        src="@/assets/user.svg"
+                        alt="Usuario"
+                        width="120"
+                        height="120"
+                      />
+                    </v-avatar>
                     <h1 class="flex my-4 primary--text">
                       Bienvenido
                     </h1>
